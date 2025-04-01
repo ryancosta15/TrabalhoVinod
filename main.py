@@ -1,4 +1,5 @@
 import monlib
+
 nlinha = 0 #esse nlinha é pra debug
 var = {}
 script = open("codteste.txt").readlines()
@@ -10,9 +11,8 @@ for linha in script:
         monlib.escrever(linha)
     elif "variavel " in linha:
         print("DEBUG - 'variavel' encontrada")
-        linha = linha.replace("variavel ", "",).replace(":", "").split(" ")
-        var.update({linha[0] : linha[1]})
-        print(var[""])
+        monlib.variavel(linha)
+print(float(var["a"]) + float(var["b"]))
 
 
 
