@@ -11,6 +11,10 @@ for linha in script:
     elif "variavel " in linha:
         print("DEBUG - 'variavel' encontrada")
         monlib.variavel(var, linha)
+    elif "limpar linha: " in linha:
+        monlib.limpar(linha)
+
+
 print(float(var["b"])+float(var["c"])) #print de debug pra ver se tava salvando as variáveis certinho
 
 
