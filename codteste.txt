@@ -1,4 +1,5 @@
 escrever: hello world
 variavel a: 10
 variavel b: 5
+variavel c: 5
 usuario: escolha o numero para ser adicionado a 10:
