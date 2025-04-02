@@ -61,7 +61,7 @@ mostrar na tela: Olá, meu nome é meu_nome!
 # Olá, meu nome é Paulo!
 ```
 
-Questionamentos previstos:
+# Questionamentos previstos:
 
 * > ***E se o usuário quiser usar uma palavra reservada da linguagem - como "variável" - em um texto sem que seja tratada como um comando?***
 
