@@ -2,7 +2,7 @@
 
 ## Tipos Primitivos de Dados
 
-Os tipos primitivos de dados presentas na linguagem Monarca podem ser listados em:
+Os tipos primitivos de dados presentes na linguagem Monarca podem ser listados em:
 
 * **Inteiro**: Representa qualquer número no conjunto dos números inteiros. Passível de sofrer operações aritméticas.
 * **Real**: Representa qualquer número no conjunto dos números reais. Passível de sofrer operações aritméticas.
