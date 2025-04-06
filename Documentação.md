@@ -9,8 +9,8 @@ Os tipos primitivos de dados presentes na linguagem Monarca podem ser listados e
 * **Texto**: Representa qualquer caractere visual dentro do padrão UTF-8. Não está passível de sofrer operações aritméticas.
 * **Lógico**: Representa operações lógicas ou seus resultados, que podem ser Verdadeiro ou Falso.
 
-## Inicializar Variável
-
+## Variável
+### Inicializar
 Para inicializar uma variável, basta seguir a seguinte sintaxe, inserindo (de acordo com a necessidade) o nome da mesma e seu valor:
 
 ```
@@ -27,7 +27,12 @@ variável gosta_de_paçoca? recebe lógico Verdadeiro
 ```
 
 Nomes de variáveis não podem ter espaços, embora possam conter caracteres especiais.
-
+## Deletar
+Para deletar uma variável já criada, basta seguir a sintaxe:
+```
+deletar variável [nome da variável]
+```
+Se a variável realmente existir, ela será deletada instantâneamente e seu espaço na memória será liberado, dando ao usuário da linguagem uma autonomia parcial sobre o consumo de memória de seus programas.
 # Funções Básicas
 
 ## mostrar na tela:
@@ -60,7 +65,6 @@ mostrar na tela: Olá, meu nome é meu_nome!
 # Saída:
 # Olá, meu nome é Paulo!
 ```
-
 # Questionamentos previstos:
 
 * > ***E se o usuário quiser usar uma palavra reservada da linguagem - como "variável" - em um texto sem que seja tratada como um comando?***
