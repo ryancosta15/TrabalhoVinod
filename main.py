@@ -30,3 +30,4 @@ for c, linha in zip(range(0, len(script)), script):
     elif linha.split(' ')[0] == 'mostrar':
         monarca.escrever(linha)
     # Vou adicionar mais depois, implementar as outras funções.
+    #testar delete que ta na documentação
