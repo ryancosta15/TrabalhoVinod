@@ -21,7 +21,7 @@ for c, linha in zip(range(0, len(script)), script):
     # Verifica se o usuário quer iniciar uma variável
     if linha.split(' ')[0] == 'variável':
         linha = linha.split(' ')
-        dado = monarca.converter_tipo(' '.join(linha[4:]), linha[3])
+        dado = monarca.converter_tipo(''.join(linha[4:]), linha[3])
         monarca.variavel(operacao='add', nome=linha[1], dado=dado)
     # Verifica se o usuário quer deletar uma variável
     elif linha.split(' ')[0] == 'deletar':
