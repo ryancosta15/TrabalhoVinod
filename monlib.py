@@ -46,11 +46,24 @@ class Monarca:
         texto = texto.split(' ')
         for c in range(0, len(texto)):
             palavra = texto[c]
-            if palavra in self.variaveis.keys():
-                texto[c] = str(self.variaveis[palavra])
+            if palavra[0] == '\\' and palavra[1:] in self.variaveis.keys():
+                texto[c] = str(self.variaveis[palavra[1:]])
         texto = texto[texto.index('tela:')+1:]
-        texto = ' '.join(texto).replace('\\', '').replace('\n', '')
+        texto = ' '.join(texto).replace('\\\\', '\\').replace('\n', '')
         print(texto)
+
+    # Versão anterior preservada caso mudemos de ideia
+    # def escrever(self, texto):
+    #     texto = texto.split(' ')
+    #     for c in range(0, len(texto)):
+    #         palavra = texto[c]
+    #         if palavra in self.variaveis.keys():
+    #             texto[c] = str(self.variaveis[palavra])
+    #     texto = texto[texto.index('tela:')+1:]
+    #     texto = ' '.join(texto).replace('\\', '').replace('\n', '')
+    #     print(texto)
+
+    
 
     # Função para inicializar ou deletar variáveis
     def variavel(self, operacao='', nome='', dado=None):
