@@ -125,7 +125,7 @@ class Monarca:
 
         except Exception:
             self.erro(f'Expressão aritmética mal formulada.')
-
+    # função para clonar o valor de uma varíavel para outra variável, já assume que a segnuda variável existe e não altera o tipo de dado da segunda varíavel.
     def clonar_valor(self, var1, var2):
         if var1 in self.variaveis.keys() and var2 in self.variaveis.keys():
             self.variaveis[var2] = self.variaveis[var1]
