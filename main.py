@@ -24,7 +24,7 @@ for c, linha in zip(range(0, len(script)), script):
     if dlinha[0] == 'variável' and dlinha[2] == 'recebe':
         if dlinha[1] == '':
             monarca.erro('O nome da variável não pode ser nulo.')
-        if 'mais' in dlinha[4:] or 'menos' in dlinha[4:] or 'vezes' in dlinha[4:] or 'divide' in dlinha[4:]:
+        if any(i in dlinha[4:] for i in monarca.operações):
             dado = monarca.aritmetica(dlinha[4:])
             dado = monarca.converter_tipo(dado, dlinha[3])
         else:
