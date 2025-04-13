@@ -22,8 +22,10 @@ for c, linha in zip(range(0, len(script)), script):
     dlinha = linha.split(' ') # Para termos tanto a linha inteira quanto a linha dividida.
     # Verifica se o usuário quer iniciar uma variável
     if dlinha[0] == 'variável' and dlinha[2] == 'recebe':
+        # Impede nome vazio para variáveis
         if dlinha[1] == '':
             monarca.erro('O nome da variável não pode ser nulo.')
+        # Busca na linha a existência de uma operação matemática e, existindo, processa o cálculo antes de criar a variável.
         if any(i in dlinha[4:] for i in monarca.operações):
             dado = monarca.aritmetica(dlinha[4:])
             dado = monarca.converter_tipo(dado, dlinha[3])
