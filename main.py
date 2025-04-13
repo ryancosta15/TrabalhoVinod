@@ -34,6 +34,9 @@ for c, linha in zip(range(0, len(script)), script):
     # Verifica se o usuário quer deletar uma variável
     elif dlinha[0] == 'deletar' and dlinha[1] == 'variável':
         monarca.variavel('del', dlinha[2])
+    # Verifica se o usuário quer clonar o valor de uma variável
+    elif dlinha[0] == 'clonar' and dlinha[1] == 'variável':
+        monarca.clonar_valor(dlinha[2], dlinha[4])
     # Verifica se o usuário quer mostrar uma mensagem na tela
     elif linha[:17] == 'mostrar na tela: ' and linha[17:] != '':
         monarca.escrever(texto=linha[17:])    
