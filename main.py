@@ -31,5 +31,10 @@ for c, linha in zip(range(0, len(script)), script):
         monarca.escrever(linha)
     else:
         monarca.erro('Comando não identificado.')
+        
+    #Trecho de código original
+    #elif linha.split(' ')[0] == 'mostrar':
+        #monarca.escrever(linha)
+
     # Vou adicionar mais depois, implementar as outras funções.
     #testar delete que ta na documentação
