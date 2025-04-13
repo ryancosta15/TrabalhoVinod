@@ -1,3 +1,2 @@
-variável idade recebe inteiro 50
-variável nome recebe texto Carlinhos
-mostrar na tela: Meu nome é \nome e minha idade é \idade
+variável idade recebe inteiro 5 mais 7 mais 12 mais 15 mais 14 menos 50
+mostrar na tela: Minha idade é \idade

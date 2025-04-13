@@ -66,7 +66,26 @@ mostrar na tela: Olá, meu nome é \meu_nome!
 # Olá, meu nome é Paulo!
 ```
 
-<!--
+# Operadores Aritméticos
+
+No Monarca existem basicamente 4 operadores aritméticos:
+
+* **mais**: Operador de adição.
+* **menos**: Operador de subtração.
+* **vezes**: Operador de multiplicação.
+* **dividindo**: Operador de divisão.
+
+A utilização destes operadores foi desenhada para a mais intuitiva possível. Por exemplo:
+
+```
+variável idade recebe inteiro 20 menos 10 mais 5
+mostrar na tela: Minha idade é \idade
+
+# Saída
+# Minha idade é 15
+```
+
+Desta forma, é possível encadear diversas operações uma após a outra, de modo que sejam executadas pela ordem aritmética comum/correta.
 
 # Questionamentos previstos:
 
@@ -82,4 +101,4 @@ mostrar na tela: Olá, meu nome é \meu_nome!
   # A variável nome foi inicializada.
   ```
 
-  Desta forma, as palavras "variável" e "nome" puderam ser utilizadas como texto sem serem interpretadas como comandos.-->
+  Desta forma, as palavras "variável" e "nome" puderam ser utilizadas como texto sem serem interpretadas como comandos.

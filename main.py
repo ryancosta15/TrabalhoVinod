@@ -17,11 +17,17 @@ except Exception:
 
 # A variável c é o index da linha, e a variável linha contém o texto da linha em si. A cada laço é interpretada uma linha do script.
 for c, linha in zip(range(0, len(script)), script):
+    linha = linha.replace('\n', '')
     monarca.linha = c # Informa o index da linha para o monarca, a fim de apontar em qual linha ocorreu algum eventual erro. 
     dlinha = linha.split(' ') # Para termos tanto a linha inteira quanto a linha dividida.
     # Verifica se o usuário quer iniciar uma variável
     if dlinha[0] == 'variável' and dlinha[2] == 'recebe':
-        dado = monarca.converter_tipo(' '.join(dlinha[4:]), dlinha[3])
+        #if 'vezes' in dlinha[4:] or 'divide' in dlinha[4:]:
+        if 'mais' in dlinha[4:] or 'menos' in dlinha[4:] or 'vezes' in dlinha[4:] or 'divide' in dlinha[4:]:
+            dado = monarca.aritmetica(dlinha[4:])
+            dado = monarca.converter_tipo(dado, dlinha[3])
+        else:
+            dado = monarca.converter_tipo(' '.join(dlinha[4:]), dlinha[3])
         monarca.variavel(operacao='add', nome=dlinha[1], dado=dado)
     # Verifica se o usuário quer deletar uma variável
     elif dlinha[0] == 'deletar' and dlinha[1] == 'variável':
@@ -30,7 +36,7 @@ for c, linha in zip(range(0, len(script)), script):
     elif linha[:17] == 'mostrar na tela: ' and linha[17:] != '':
         monarca.escrever(texto=linha[17:])    
     # Entrega um erro caso o usuário não digite nenhum comando conhecido pelo Monarca. Será ignorado caso seja uma linha vazia. 
-    elif linha != '\n':
-        monarca.erro('Comando não identificado.')
+    else:
+        monarca.erro(f'Comando "{dlinha[0]}" não identificado.')
     # Vou adicionar mais depois, implementar as outras funções.
     #testar delete que ta na documentação

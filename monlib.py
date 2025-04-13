@@ -9,7 +9,7 @@ class Monarca:
     # Função de erro. Basta passar a mensagem de erro como argumento, que ele vai reconhecer a linha do erro sozinho.
     def erro(self, mensagem=''):
         print('='*10, 'Monarca', '='*10)
-        print(f'Erro na linha {self.linha}. ' + mensagem)
+        print(f'* Erro na linha {self.linha + 1}. ' + mensagem)
     
     def converter_tipo(self, dado, tipo=''):
         try:
@@ -75,12 +75,25 @@ class Monarca:
                 self.erro(f'Variável "{nome}" não existente.')
 
     # Função de somar, pega qualquer argumento dado e soma todos. Ainda não implementado.
-    def somar(self, numeros):
-        numeros = numeros.split(' + ')
+    def aritmetica(self, expressao):
         total = 0
-        for n in numeros:
-            try:
-                total += int(n)
-            except ValueError:
-                self.erro(f'Tipo inválido para soma: {self.tipo_de_dado(n)}')
-        return total
+        try:
+            for c in range(0, len(expressao)):
+                if expressao[c] == 'mais':
+                    if c == 1:
+                        total = float(expressao[c-1]) + float(expressao[c+1])
+                        c += 1
+                    else:
+                        total += float(expressao[c+1])
+
+                elif expressao[c] == 'menos':
+                    if c == 1: 
+                        total = float(expressao[c-1]) - float(expressao[c+1])
+                        c += 1
+                    else:
+                        total -= float(expressao[c+1])
+                                        
+            return total
+
+        except Exception:
+            self.erro(f'Expressão aritmética mal formulada.')
