@@ -50,7 +50,7 @@ Esta função também pode ser usada referenciando-se uma variável no campo dos
 
 ```
 variável nome recebe texto Maria
-mostar na tela: \nome
+mostrar na tela: \nome
 
 # Saída:
 # Maria
