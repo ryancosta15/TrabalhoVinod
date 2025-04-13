@@ -4,6 +4,7 @@ class Monarca:
     def __init__(self, linha=0):
         self.linha = linha
         self.variaveis = {}
+        self.operações = {'mais', 'menos', 'vezes', 'dividindo'}
         pass
 
     # Função de erro. Basta passar a mensagem de erro como argumento, que ele vai reconhecer a linha do erro sozinho.
