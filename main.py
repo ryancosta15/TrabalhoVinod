@@ -20,15 +20,15 @@ for c, linha in zip(range(0, len(script)), script):
     monarca.linha = c # Informa o index da linha para o monarca, a fim de apontar em qual linha ocorreu algum eventual erro. 
     dlinha = linha.split(' ') # Para termos tanto a linha inteira quanto a linha dividida.
     # Verifica se o usuário quer iniciar uma variável
-    if dlinha[0] == 'variável' and dlinha[2] == 'recebe' and len(dlinha) >= 4:
+    if dlinha[0] == 'variável' and dlinha[2] == 'recebe':
         dado = monarca.converter_tipo(' '.join(dlinha[4:]), dlinha[3])
         monarca.variavel(operacao='add', nome=dlinha[1], dado=dado)
     # Verifica se o usuário quer deletar uma variável
-    elif dlinha[0] == 'deletar':
+    elif dlinha[0] == 'deletar' and dlinha[1] == 'variável':
         monarca.variavel('del', dlinha[2])
     # Verifica se o usuário quer mostrar uma mensagem na tela
-    elif dlinha[0] == 'mostrar':
-        monarca.escrever(linha)    
+    elif linha[:17] == 'mostrar na tela: ' and linha[17:] != '':
+        monarca.escrever(texto=linha[17:])    
     # Entrega um erro caso o usuário não digite nenhum comando conhecido pelo Monarca. Será ignorado caso seja uma linha vazia. 
     elif linha != '\n':
         monarca.erro('Comando não identificado.')

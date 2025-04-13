@@ -48,7 +48,6 @@ class Monarca:
             palavra = texto[c]
             if palavra[0] == '\\' and palavra[1:] in self.variaveis.keys():
                 texto[c] = str(self.variaveis[palavra[1:]])
-        texto = texto[texto.index('tela:')+1:]
         texto = ' '.join(texto).replace('\\\\', '\\').replace('\n', '')
         print(texto)
 
