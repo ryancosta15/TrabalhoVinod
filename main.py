@@ -27,7 +27,9 @@ for c, linha in zip(range(0, len(script)), script):
     elif linha.split(' ')[0] == 'deletar':
         linha = linha.split(' ')
         monarca.variavel('del', linha[2])
-    elif linha.split(' ')[0] == 'mostrar':
+    elif linha[:16] == 'mostrar na tela:':
         monarca.escrever(linha)
+    else:
+        monarca.erro('Comando não identificado.')
     # Vou adicionar mais depois, implementar as outras funções.
     #testar delete que ta na documentação
