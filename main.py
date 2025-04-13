@@ -29,7 +29,7 @@ for c, linha in zip(range(0, len(script)), script):
         monarca.variavel('del', linha[2])
     elif linha[:16] == 'mostrar na tela:':
         monarca.escrever(linha)
-    else:
+    elif linha != '\n':
         monarca.erro('Comando não identificado.')
         
     #Trecho de código original
