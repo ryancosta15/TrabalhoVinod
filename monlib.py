@@ -4,13 +4,13 @@ class Monarca:
     def __init__(self, linha=0):
         self.linha = linha
         self.variaveis = {}
-        self.operações = {'mais', 'menos', 'vezes', 'dividindo'}
         pass
 
     # Função de erro. Basta passar a mensagem de erro como argumento, que ele vai reconhecer a linha do erro sozinho.
     def erro(self, mensagem=''):
-        print('='*10, 'Monarca', '='*10)
-        print(f'* Erro na linha {self.linha + 1}. ' + mensagem)
+        print('\033[1;33m='*10, 'Monarca', '='*10)
+        print(f'\033[1;31m * Erro na linha {self.linha + 1}. \033[0m' + mensagem)
+        exit()
     
     def converter_tipo(self, dado, tipo=''):
         try:
@@ -23,9 +23,9 @@ class Monarca:
             elif tipo == 'texto':
                 return dado
             else:
-                self.erro(f'O tipo {tipo} especificado não existe.')
+                self.erro(f'O tipo \033[1m\033[3m{tipo}\033[0m especificado não existe.')
         except Exception:
-                self.erro(f'Dado impróprio para a conversão para o tipo {tipo}.')
+                self.erro(f'Dado impróprio para a conversão para o tipo \033[1m\033[3m{tipo}\033[0m.')
 
     # Função usada pelo interpretador para entender automaticamente de que tipo são os dados escritos no código do usuário
     def tipo_de_dado(self, dado=''):
@@ -73,11 +73,37 @@ class Monarca:
             if nome in self.variaveis.keys():
                 self.variaveis.pop(nome)
             else:
-                self.erro(f'Variável "{nome}" não existente.')
+                self.erro(f'Variável \033[1m\033[3m"{nome}"\033[0m não existente.')
 
-    # Função de somar, pega qualquer argumento dado e soma todos. Ainda não implementado.
+    # Função de operações aritméticas. Analisa primeiramente os operadores de multiplicação e divisão, depois os de adição e subtração.
     def aritmetica(self, expressao):
         total = 0
+        
+        # Continua rodando até que todos os operadores de multiplicação e divisão tenham sido substituídos pelos resultados numéricos de suas operações, para que só então as outras operações possam ser executadas.
+        while 'vezes' in expressao or 'dividindo' in expressao:
+            try:
+                if 'vezes' in expressao:
+                    n1 = expressao[expressao.index('vezes') - 1]
+                    n2 = expressao[expressao.index('vezes') + 1]
+                    resultado = float(n1)*float(n2)
+                    # Substitui a operação pelo resultado.
+                    expressao[expressao.index('vezes')+1] = resultado
+                    expressao.pop(expressao.index('vezes'))
+                    expressao.pop(expressao.index(n1))
+                    total = resultado
+                elif 'dividindo' in expressao:
+                    n1 = expressao[expressao.index('dividindo') - 1]
+                    n2 = expressao[expressao.index('dividindo') + 1]
+                    resultado = float(n1)/float(n2)
+                    # Substitui a operação pelo resultado
+                    expressao[expressao.index('dividindo')+1] = resultado
+                    expressao.pop(expressao.index('dividindo'))
+                    expressao.pop(expressao.index(n1))
+                    total = resultado
+    
+            except Exception:
+                self.erro(f'Expressão aritmética mal formulada.')
+
         try:
             for c in range(0, len(expressao)):
                 if expressao[c] == 'mais':

@@ -22,11 +22,8 @@ for c, linha in zip(range(0, len(script)), script):
     dlinha = linha.split(' ') # Para termos tanto a linha inteira quanto a linha dividida.
     # Verifica se o usuário quer iniciar uma variável
     if dlinha[0] == 'variável' and dlinha[2] == 'recebe':
-        # Impede nome vazio para variáveis
-        if dlinha[1] == '':
-            monarca.erro('O nome da variável não pode ser nulo.')
-        # Busca na linha a existência de uma operação matemática e, existindo, processa o cálculo antes de criar a variável.
-        if any(i in dlinha[4:] for i in monarca.operações):
+        #if 'vezes' in dlinha[4:] or 'divide' in dlinha[4:]:
+        if 'mais' in dlinha[4:] or 'menos' in dlinha[4:] or 'vezes' in dlinha[4:] or 'divide' in dlinha[4:]:
             dado = monarca.aritmetica(dlinha[4:])
             dado = monarca.converter_tipo(dado, dlinha[3])
         else:
@@ -40,6 +37,6 @@ for c, linha in zip(range(0, len(script)), script):
         monarca.escrever(texto=linha[17:])    
     # Entrega um erro caso o usuário não digite nenhum comando conhecido pelo Monarca. Será ignorado caso seja uma linha vazia. 
     else:
-        monarca.erro(f'Comando "{dlinha[0]}" não identificado.')
+        monarca.erro(f'Sintaxe inválida. Consulte a documentação.')
     # Vou adicionar mais depois, implementar as outras funções.
     #testar delete que ta na documentação
