@@ -20,6 +20,9 @@ for c, linha in zip(range(0, len(script)), script):
     linha = linha.replace('\n', '')
     monarca.linha = c # Informa o index da linha para o monarca, a fim de apontar em qual linha ocorreu algum eventual erro. 
     dlinha = linha.split(' ') # Para termos tanto a linha inteira quanto a linha dividida.
+    # checa se há comentários, se sim, não checa por comandos na linha (eu acho? tá funcionando, então imagino que sim)
+    if dlinha[0] == '::info':
+        continue
     # Verifica se o usuário quer iniciar uma variável
     if dlinha[0] == 'variável' and dlinha[2] == 'recebe':
          # Impede nome vazio para variáveis
@@ -30,7 +33,7 @@ for c, linha in zip(range(0, len(script)), script):
             dado = monarca.converter_tipo(dado, dlinha[3])
         else:
             dado = monarca.converter_tipo(' '.join(dlinha[4:]), dlinha[3])
-        monarca.variavel(operacao='add', nome=dlinha[1], dado=dado)
+        monarca.variavel(operacao='add', nome=dlinha[1], tipo=dlinha[3], dado=dado)
     # Verifica se o usuário quer deletar uma variável
     elif dlinha[0] == 'deletar' and dlinha[1] == 'variável':
         monarca.variavel('del', dlinha[2])
