@@ -4,6 +4,7 @@ class Monarca:
     def __init__(self, linha=0):
         self.linha = linha
         self.variaveis = {}
+        self.vartipos = {}
         self.operações = {'mais', 'menos', 'vezes', 'dividindo'}
         pass
 
@@ -67,12 +68,14 @@ class Monarca:
     
 
     # Função para inicializar ou deletar variáveis
-    def variavel(self, operacao='', nome='', dado=None):
+    def variavel(self, operacao='', nome='', tipo='', dado=None):
         if operacao == 'add':
             self.variaveis.update({nome : dado})
+            self.vartipos.update({nome : tipo})
         elif operacao == 'del':
             if nome in self.variaveis.keys():
                 self.variaveis.pop(nome)
+                self.vartipos.pop(nome)
             else:
                 self.erro(f'Variável \033[1m\033[3m"{nome}"\033[0m não existente.')
 
@@ -126,6 +129,8 @@ class Monarca:
         except Exception:
             self.erro(f'Expressão aritmética mal formulada.')
 
+    # função para clonar o valor e o tipo de uma variável para a outra
     def clonar_valor(self, var1, var2):
         if var1 in self.variaveis.keys() and var2 in self.variaveis.keys():
             self.variaveis[var2] = self.variaveis[var1]
+            self.vartipos[var2] = self.vartipos[var1]
