@@ -1,5 +1,9 @@
+from time import time
+tempo_inicial = time()
+
 from argparse import ArgumentParser
 from monlib import Monarca
+
 
 # Define o argumento "-s" ou "--script" para usuários de linha de comando apontarem onde está o script que desejam executar.
 argumentos = ArgumentParser(usage='monarca.py -s script.mc')
@@ -48,3 +52,6 @@ for c, linha in zip(range(0, len(script)), script):
         monarca.erro(f'Sintaxe inválida. Consulte a documentação.')
     # Vou adicionar mais depois, implementar as outras funções.
     #testar delete que ta na documentação
+
+tempo_final = time()
+print(f'\n\033[1;33mTempo de execução: {tempo_final-tempo_inicial:.4f} segundos.\033[m')
