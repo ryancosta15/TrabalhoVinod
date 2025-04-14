@@ -33,6 +33,14 @@ Para deletar uma variável já criada, basta seguir a sintaxe:
 deletar variável [nome da variável]
 ```
 Se a variável realmente existir, ela será deletada instantâneamente e seu espaço na memória será liberado, dando ao usuário da linguagem uma autonomia parcial sobre o consumo de memória de seus programas.
+### Clonar
+Para clonar o valor e o tipo de uma variável já criada para outra variável, basta adicionar:
+```
+clonar variável [nome da variável a ser clonada] para [nome da variável alvo] 
+```
+Caso a variável a ser clonada exista na memória, todos os seus dados - com exceção do nome - serão clonados para a variável alvo.
+
+Este comando não checa se a variável alvo existe na memória.
 # Funções Básicas
 
 ## mostrar na tela:
@@ -42,8 +50,8 @@ A função "***mostrar na tela:***"  só possui 1 parâmetro: o conteúdo a ser 
 ```
 mostrar na tela: Olá Mundo em Monarca!
 
-# Saída:
-# Olá Mundo em Monarca!
+::info Saída:
+::info Olá Mundo em Monarca!
 ```
 
 Esta função também pode ser usada referenciando-se uma variável no campo dos dados, usando para tal o caractere de contrabarra ( \ ):
@@ -52,8 +60,8 @@ Esta função também pode ser usada referenciando-se uma variável no campo dos
 variável nome recebe texto Maria
 mostrar na tela: \nome
 
-# Saída:
-# Maria
+::info Saída:
+::info Maria
 ```
 
 Além disto, é possível exibir texto direto e conteúdo de variável ao mesmo tempo:
@@ -62,8 +70,8 @@ Além disto, é possível exibir texto direto e conteúdo de variável ao mesmo 
 variável meu_nome recebe texto Paulo
 mostrar na tela: Olá, meu nome é \meu_nome!
 
-# Saída:
-# Olá, meu nome é Paulo!
+::info Saída:
+::info Olá, meu nome é Paulo!
 ```
 
 # Operadores Aritméticos
@@ -81,8 +89,8 @@ A utilização destes operadores foi desenhada para a mais intuitiva possível. 
 variável idade recebe inteiro 20 menos 10 mais 5
 mostrar na tela: Minha idade é \idade
 
-# Saída
-# Minha idade é 15
+::info Saída
+::info Minha idade é 15
 ```
 
 Desta forma, é possível encadear diversas operações uma após a outra, de modo que sejam executadas pela ordem aritmética comum/correta.
@@ -97,8 +105,22 @@ Desta forma, é possível encadear diversas operações uma após a outra, de mo
   variável nome recebe texto Alan
   mostrar na tela: A \variável \nome foi inicializada.
   
-  # Saída:
-  # A variável nome foi inicializada.
+  ::info Saída:
+  ::info A variável nome foi inicializada.
   ```
 
   Desta forma, as palavras "variável" e "nome" puderam ser utilizadas como texto sem serem interpretadas como comandos.
+
+* > ***Como posso comentar meu código?***
+
+    Você deve ter percebido que, ao longo desse documento, as saídas de comandos foram precedidas por "::info". Essa sintaxe, ao ser reconhecida pelo interpretador, faz com que a linha onde ela aparece não seja alvo de checagens de comandos, tendo a mesma funcionalidade que comentários em outras linguagens de programação.
+    Exemplo:
+  ```
+  mostrar na tela: Hoje eu fui no parque
+  ::info mostrar na tela: tomei um sorvete
+  mostrar na tela: e depois voltei pra casa
+
+  ::info Saída:
+  ::info Hoje eu fui no parque
+  ::info e depois voltei pra casa
+  ```
