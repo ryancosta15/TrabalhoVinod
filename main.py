@@ -21,12 +21,10 @@ except Exception:
 
 # A variável c é o index da linha, e a variável linha contém o texto da linha em si. A cada laço é interpretada uma linha do script.
 for c, linha in zip(range(0, len(script)), script):
-    linha = linha.replace('\n', '')
-    monarca.linha = c # Informa o index da linha para o monarca, a fim de apontar em qual linha ocorreu algum eventual erro. 
-    dlinha = linha.split(' ') # Para termos tanto a linha inteira quanto a linha dividida.
-    # checa se há comentários, se sim, não checa por comandos na linha (eu acho? tá funcionando, então imagino que sim)
-    if dlinha[0] == '::info':
-        continue
+    dlinha = linha.split(' ') # Para termos acesso tanto a linha inteira quanto a linha dividida.
+    if linha == '\n' or linha.strip() == '' or dlinha[0] == '::info': # Checa se a linha é um comentário ou está vazia.
+        continue                                                      # Se sim, a ignora e passa para a próxima.
+    monarca.linha = c # Informa o index da linha para o monarca, a fim de apontar em qual linha ocorreu algum eventual erro.  
     # Verifica se o usuário quer iniciar uma variável
     if dlinha[0] == 'variável' and dlinha[2] == 'recebe':
          # Impede nome vazio para variáveis
