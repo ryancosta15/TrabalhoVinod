@@ -21,6 +21,7 @@ except Exception:
 
 # A variável c é o index da linha, e a variável linha contém o texto da linha em si. A cada laço é interpretada uma linha do script.
 for c, linha in zip(range(0, len(script)), script):
+    linha = linha.replace('\n', '') # Impede que a quebra de linha atrapalhe a leitura dos dados
     dlinha = linha.split(' ') # Para termos acesso tanto a linha inteira quanto a linha dividida.
     if linha == '\n' or linha.strip() == '' or dlinha[0] == '::info': # Checa se a linha é um comentário ou está vazia.
         continue                                                      # Se sim, a ignora e passa para a próxima.
