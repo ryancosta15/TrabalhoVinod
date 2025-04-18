@@ -13,21 +13,35 @@ class Monarca:
         print('\033[1;33m='*10, 'Monarca', '='*10)
         print(f'\033[1;31m * Erro na linha {self.linha + 1}. \033[0m' + mensagem)
         exit()
-    
-    def converter_tipo(self, dado, tipo=''):
-        try:
-            if tipo == 'inteiro':
-                return int(dado)
-            elif tipo == 'real':
-                return float(dado)
-            elif tipo == 'booleano':
-                return bool(dado)
-            elif tipo == 'texto':
-                return dado
+
+    def processar_variavel(self, dado):
+        try:                   
+            if all(i in {"0","1","2","3","4","5","6","7","8","9",","} for i in dado): # Checa se cada caractere da string é um algarismo ou uma vírgula.            
+                if dado.count(",") == 0:                    
+                    return int(dado)
+                else:                          
+                    return float(dado.replace(",", "."))
+            
             else:
-                self.erro(f'O tipo \033[1m\033[3m{tipo}\033[0m especificado não existe.')
+                raise Exception
         except Exception:
-                self.erro(f'Dado impróprio para a conversão para o tipo \033[1m\033[3m{tipo}\033[0m.')
+            self.erro('Dado, variável ou operação não reconhecido(a).')
+      
+    
+    # def converter_tipo(self, dado, tipo=''):
+    #     try:
+    #         if tipo == 'inteiro':
+    #             return int(dado)
+    #         elif tipo == 'real':
+    #             return float(dado)
+    #         elif tipo == 'booleano':
+    #             return bool(dado)
+    #         elif tipo == 'texto':
+    #             return dado
+    #         else:
+    #             self.erro(f'O tipo \033[1m\033[3m{tipo}\033[0m especificado não existe.')
+    #     except Exception:
+    #             self.erro(f'Dado impróprio para a conversão para o tipo \033[1m\033[3m{tipo}\033[0m.')
 
     # Função usada pelo interpretador para entender automaticamente de que tipo são os dados escritos no código do usuário
     def tipo_de_dado(self, dado=''):
@@ -52,30 +66,15 @@ class Monarca:
             if palavra[0] == '\\' and palavra[1:] in self.variaveis.keys():
                 texto[c] = str(self.variaveis[palavra[1:]])
         texto = ' '.join(texto).replace('\\\\', '\\').replace('\n', '')
-        print(texto)
-
-    # Versão anterior preservada caso mudemos de ideia
-    # def escrever(self, texto):
-    #     texto = texto.split(' ')
-    #     for c in range(0, len(texto)):
-    #         palavra = texto[c]
-    #         if palavra in self.variaveis.keys():
-    #             texto[c] = str(self.variaveis[palavra])
-    #     texto = texto[texto.index('tela:')+1:]
-    #     texto = ' '.join(texto).replace('\\', '').replace('\n', '')
-    #     print(texto)
-
-    
+        print(texto)    
 
     # Função para inicializar ou deletar variáveis
-    def variavel(self, operacao='', nome='', tipo='', dado=None):
+    def variavel(self, operacao='', nome='', var=None):
         if operacao == 'add':
-            self.variaveis.update({nome : dado})
-            self.vartipos.update({nome : tipo})
+            self.variaveis.update({nome : var})
         elif operacao == 'del':
             if nome in self.variaveis.keys():
                 self.variaveis.pop(nome)
-                self.vartipos.pop(nome)
             else:
                 self.erro(f'Variável \033[1m\033[3m"{nome}"\033[0m não existente.')
 
