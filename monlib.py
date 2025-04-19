@@ -5,7 +5,7 @@ class Monarca:
         self.linha = linha
         self.variaveis = {}
         self.vartipos = {}
-        self.operações = {'mais', 'menos', 'vezes', 'dividindo'}
+        self.operações = ['mais', 'menos', 'vezes', 'dividindo']
         pass
 
     # Função de erro. Basta passar a mensagem de erro como argumento, que ele vai reconhecer a linha do erro sozinho.
