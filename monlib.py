@@ -4,8 +4,7 @@ class Monarca:
     def __init__(self, linha=0):
         self.linha = linha
         self.variaveis = {}
-        self.vartipos = {}
-        self.operações = {'mais', 'menos', 'vezes', 'dividindo'}
+        self.operações = ['mais', 'menos', 'vezes', 'dividindo']
         pass
 
     # Função de erro. Basta passar a mensagem de erro como argumento, que ele vai reconhecer a linha do erro sozinho.
@@ -15,8 +14,34 @@ class Monarca:
         exit()
 
     def processar_variavel(self, dado):
-        try:                   
-            if all(i in {"0","1","2","3","4","5","6","7","8","9",","} for i in dado): # Checa se cada caractere da string é um algarismo ou uma vírgula.            
+        try:
+            expressao = [] # Uma lista para ir depositando os elementos do dado durante o processamento. Por exemplo, um dado "5 mais 5" eventualmente iria ficar {'5', 'mais', '5}, separando os tipos de dado, as variáveis e as operações.
+ 
+            while dado != '':
+                if dado[0] == "\"":
+                    c = dado.find("\"", 1)
+                    expressao.append(dado[0:c+1]) 
+                    dado = dado[c+1:]                                               
+                
+                elif dado[0] == ' ':
+                    dado = dado[1:]
+
+                else:
+                    if "\"" in dado:
+                        c = dado.find("\"")
+                        expressao.append(dado[0:c-1])
+                        dado = dado[c:]
+                    else:                    
+                        expressao.append(dado[0:])
+                        dado = ''                    
+                
+            print(expressao)
+            print("debug")
+
+            if dado in self.variaveis.keys():                
+                dado = dado.replace(dado,str(self.variaveis[dado]))
+
+            if all(i in {"0","1","2","3","4","5","6","7","8","9",","} for i in dado): # Checa se cada caractere do trecho de string é um algarismo ou uma vírgula.            
                 if dado.count(",") == 0:                    
                     return int(dado)
                 else:                          
