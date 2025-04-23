@@ -15,43 +15,91 @@ class Monarca:
 
     def processar_variavel(self, dado):
         try:
-            expressao = [] # Uma lista para ir depositando os elementos do dado durante o processamento. Por exemplo, um dado "5 mais 5" eventualmente iria ficar {'5', 'mais', '5}, separando os tipos de dado, as variáveis e as operações.
- 
-            while dado != '':
-                if dado[0] == "\"":
-                    c = dado.find("\"", 1)
-                    expressao.append(dado[0:c+1]) 
-                    dado = dado[c+1:]                                               
-                
-                elif dado[0] == ' ':
-                    dado = dado[1:]
+            expressao = [] # Uma lista para ir depositando os elementos do dado durante o processamento.
+            # Por exemplo, um dado "5 mais 5" eventualmente iria ficar {'5', 'mais', '5'}, separando os tipos de dado, as variáveis e as operações.
+            trecho = '' # Variável para se ler apenas trechos do dado inteiro
 
-                else:
-                    if "\"" in dado:
+            # Primeira parte da função.
+            # A cada loop, um trecho é lido, interpretado e armazenado na lista.
+            while dado != '': # Cada trecho lido e armazenado é em seguida apagado da string dado. Ou seja, o loop roda enquanto ainda há trecho a ser lido.
+                if dado[0] == "\"": # Checa se a expressão começa com aspa, ou seja, se há uma string logo no início. Se sim, checa se há outra aspa e caso haja armazena o trecho interior como string e o apaga da variável string dado.
+                    c = dado.find("\"", 1) # Índice da próxima aspa
+                    if c != -1: # Ou seja, se existe outra aspa para completar o par.
+                        expressao.append(dado[0:c+1]) 
+                        dado = dado[c+1:] 
+                        continue
+                    else:   # Se não existe par, aponta erro
+                        raise Exception                 
+                else: # Em caso de não começar com aspa. Ou seja, poderia ser um número, uma variável etc.
+                    if "\"" in dado:                # Esse if...else checa se em dado momento aparecerá uma string. Se não aparecer, o código só lê tudo. Se aparecer, lê até o momento da string.
                         c = dado.find("\"")
-                        expressao.append(dado[0:c-1])
+                        trecho = dado[0:c].split()                        
                         dado = dado[c:]
                     else:                    
-                        expressao.append(dado[0:])
-                        dado = ''                    
-                
-            print(expressao)
-            print("debug")
+                        trecho = dado[0:].split()
+                        dado = ''
+                    for palavra in trecho: # Leitura do trecho. Checa e substitui as variáveis, checa a validade dos números, etc
+                        if palavra in self.variaveis.keys():                            
+                            palavra = self.variaveis[palavra]
+                        elif all(i in {"0","1","2","3","4","5","6","7","8","9",","} for i in palavra) and palavra.count(",") <= 1: # Se o trecho for apenas números e vírgula e, havendo vírgula, houver apenas uma.                    
+                            palavra = palavra.replace(",",".")  # Converte vírgula para ponto para poder ser lido nas operações.
+                        elif not palavra in self.operações: # Se não for variável nem número, e também não for nenhuma operação, dá erro.
+                            raise Exception
+                        expressao.append(palavra) 
+            # Ao final desse loop while, uma expressão "Oi, meu nome é " nome " e eu tenho " 23,5 mais 5,5 " anos", supondo que nome seja uma variável de valor "Carlos",
+            # ficaria uma lista ['"Oi, meu nome é "', '"Carlos"', '" e eu tenho "', '23.5', 'mais', '5.5', '" anos"']
 
-            if dado in self.variaveis.keys():                
-                dado = dado.replace(dado,str(self.variaveis[dado]))
-
-            if all(i in {"0","1","2","3","4","5","6","7","8","9",","} for i in dado): # Checa se cada caractere do trecho de string é um algarismo ou uma vírgula.            
-                if dado.count(",") == 0:                    
-                    return int(dado)
-                else:                          
-                    return float(dado.replace(",", "."))
+            # Segunda parte da função, a etapa das operações.
+            i = 0            
+            while 'vezes' in expressao or 'dividindo' in expressao:                                      
+                if expressao[i] == 'vezes' or expressao[i] == 'dividindo':
+                    num1 = expressao[i - 1]
+                    num2 = expressao[i + 1]
+                    match expressao[i]:
+                        case 'vezes':                        
+                            resultado = float(num1) * float(num2)
+                        case 'dividindo':
+                            resultado = float(num1) / float(num2)
+                    expressao[i+1] = str(resultado)                   
+                    expressao.pop(i - 1)                    
+                    expressao.pop(i - 1)                                        
+                else:
+                    i += 1 
+            i = 0
+            while 'mais' in expressao or 'menos' in expressao:                                      
+                if expressao[i] == 'mais' or expressao[i] == 'menos':
+                    num1 = expressao[i - 1]
+                    num2 = expressao[i + 1]
+                    match expressao[i]:
+                        case 'mais':                        
+                            resultado = float(num1) + float(num2)
+                        case 'menos':
+                            resultado = float(num1) - float(num2)                    
+                    expressao[i+1] = str(resultado)                 
+                    expressao.pop(i - 1)                    
+                    expressao.pop(i - 1)                                        
+                else:
+                    i += 1 
             
+            # Terceira etapa: tipagem e finalização. Nesse ponto, se a expressão não retornar uma lista com um único elemento, será tratada como uma string. 
+            # Também será tratada como string se tiver um único elemento envolto em aspas.
+
+            # Converte ponto para vírgula
+            for i, palavra in enumerate(expressao):                
+                if all(c in {"0","1","2","3","4","5","6","7","8","9","."} for c in palavra):
+                    expressao[i] = expressao[i].replace(".",",")
+
+            if len(expressao) > 1 or expressao[0][0] == "\"":
+                expressao = "\"" + ''.join(expressao).replace("\"",'') + "\""
+                return expressao
             else:
-                raise Exception
+                i = expressao[0].find(".")              
+                if i != -1 and expressao[0][i + 1] == 0:
+                    return expressao[0][0:i]
+                else:
+                    return expressao[0]
         except Exception:
-            self.erro('Dado, variável ou operação não reconhecido(a).')
-      
+            self.erro('Dado, variável ou operação não reconhecido(a).')      
     
     # def converter_tipo(self, dado, tipo=''):
     #     try:

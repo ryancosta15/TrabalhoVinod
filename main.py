@@ -21,22 +21,26 @@ except Exception:
 # A variável c é o index da linha, e a variável linha contém o texto da linha em si. A cada laço é interpretada uma linha do script.
 for c, linha in zip(range(0, len(script)), script):
     linha = linha.replace('\n', '') # Impede que a quebra de linha atrapalhe a leitura dos dados
-    dlinha = linha.split(' ') # Para termos acesso tanto a linha inteira quanto a linha dividida.    
+    dlinha = linha.split() # Para termos acesso tanto a linha inteira quanto a linha dividida.    
     if linha == '\n' or linha.strip() == '' or dlinha[0] == '::info': # Checa se a linha é um comentário ou está vazia.
         continue                                                      # Se sim, a ignora e passa para a próxima.
     monarca.linha = c # Informa o index da linha para o Monarca, a fim de apontar em qual linha ocorreu algum eventual erro.  
     # Verifica se o usuário quer iniciar uma variável
     if dlinha[0] == 'variável' and dlinha[2] == 'recebe':
-         # Impede nome vazio para variáveis
+        # Impede nome vazio para variáveis
         if dlinha[1] == '':
             monarca.erro('O nome da variável não pode ser nulo.')
         var = monarca.processar_variavel(dado=' '.join(dlinha[3:])) # Envia tudo o que vier depois de "recebe" para ser processado pela função.    
-        monarca.variavel(operacao='add', nome=dlinha[1], var=var)       
-    
+        monarca.variavel(operacao='add', nome=dlinha[1], var=var)   
+    # Verifica se o usuário quer deletar uma variável
+    elif dlinha[0] == 'deletar' and dlinha[1] == 'variável':
+        monarca.variavel('del', dlinha[2])
+    # Verifica se o usuário quer clonar o valor de uma variável
+    elif dlinha[0] == 'clonar' and dlinha[1] == 'variável':
+        monarca.clonar_valor(dlinha[2], dlinha[4])      
      # Verifica se o usuário quer mostrar uma mensagem na tela
     elif linha[:17] == 'mostrar na tela: ' and linha[17:] != '':
         monarca.escrever(texto=linha[17:])     
-
     # Entrega um erro caso o usuário não digite nenhum comando conhecido pelo Monarca. Será ignorado caso seja uma linha vazia. 
     else:
         monarca.erro(f'Sintaxe inválida. Consulte a documentação.')   
@@ -47,12 +51,7 @@ print(f'\n\033[1;33mTempo de execução: {tempo_final-tempo_inicial:.4f} segundo
 ##### LEMBRETES
 # Checar como se comportam variáveis com nomes ou dados vazios
 
-
-
-
-
-##### Trechos de código na geladeira
-
+# Trecho apagado
 # if any(i in dlinha[4:] for i in monarca.operações):
     #     dado = monarca.aritmetica(dlinha[4:])
     #     dado = monarca.converter_tipo(dado, dlinha[3])
@@ -60,9 +59,3 @@ print(f'\n\033[1;33mTempo de execução: {tempo_final-tempo_inicial:.4f} segundo
     #     dado = monarca.converter_tipo(' '.join(dlinha[4:]), dlinha[3])
     # monarca.variavel(operacao='add', nome=dlinha[1], tipo=dlinha[3], dado=dado)
 
-# # Verifica se o usuário quer deletar uma variável
-# elif dlinha[0] == 'deletar' and dlinha[1] == 'variável':
-#     monarca.variavel('del', dlinha[2])
-# # Verifica se o usuário quer clonar o valor de uma variável
-# elif dlinha[0] == 'clonar' and dlinha[1] == 'variável':
-#     monarca.clonar_valor(dlinha[2], dlinha[4])
