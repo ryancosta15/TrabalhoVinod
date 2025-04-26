@@ -45,7 +45,14 @@ for c, linha in zip(range(0, len(script)), script):
         monarca.clonar_valor(dlinha[2], dlinha[4])
     # Verifica se o usuário quer mostrar uma mensagem na tela
     elif linha[:17] == 'mostrar na tela: ' and linha[17:] != '':
-        monarca.escrever(texto=linha[17:])    
+        monarca.escrever(texto=linha[17:])
+    elif dlinha[0] == 'entrada':
+        if dlinha[2:] == '':
+            inputmsg = 'vazio'
+        else:
+            inputmsg = ' '.join(dlinha[2:])
+        nome = linha[8:-1]
+        monarca.input(inputmsg, nome)
     # Entrega um erro caso o usuário não digite nenhum comando conhecido pelo Monarca. Será ignorado caso seja uma linha vazia. 
     else:
         monarca.erro(f'Sintaxe inválida. Consulte a documentação.')

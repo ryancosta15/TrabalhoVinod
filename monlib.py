@@ -134,3 +134,11 @@ class Monarca:
         if var1 in self.variaveis.keys() and var2 in self.variaveis.keys():
             self.variaveis[var2] = self.variaveis[var1]
             self.vartipos[var2] = self.vartipos[var1]
+
+    # função para pegar o input do usuário, nome temporário
+    def input(self, inputmsg, nome):
+        if inputmsg != "vazio":
+            dado = input(f"{inputmsg}: ")
+        else:
+            dado = input()
+        self.variaveis.update({nome : dado})

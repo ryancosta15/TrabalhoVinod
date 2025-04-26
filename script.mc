@@ -11,3 +11,5 @@ mostrar na tela: Tenho todos os 4 operadores aritméticos básicos! Cheque a min
 mostrar na tela: --Clonar os dados de uma variável para outra--
 ::info insert demonstração de clone aqui
 mostrar na tela: --Suporte a comentários no código, que não passam pelas checagens de sintaxe!--
+entrada a: fala o numero patrao
+mostrar na tela: \a
