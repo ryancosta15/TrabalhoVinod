@@ -41,6 +41,12 @@ clonar variável [nome da variável a ser clonada] para [nome da variável alvo]
 Caso a variável a ser clonada exista na memória, todos os seus dados - com exceção do nome - serão clonados para a variável alvo.
 
 Este comando não checa se a variável alvo existe na memória.
+### Definir valor de variável usando uma entrada
+Para definir o valor de uma variável usando uma entrada, basta utilizar:
+```
+entrada [nome da variavel] recebe: [texto opcional]
+```
+A variável será criada na memória (caso ela não exista) e receberá os dados que o usuário digitar no terminal
 # Funções Básicas
 
 ## mostrar na tela:

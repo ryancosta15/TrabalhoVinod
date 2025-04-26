@@ -50,8 +50,8 @@ for c, linha in zip(range(0, len(script)), script):
         if dlinha[2:] == '':
             inputmsg = 'vazio'
         else:
-            inputmsg = ' '.join(dlinha[2:])
-        nome = linha[8:-1]
+            inputmsg = ' '.join(dlinha[3:])
+        nome = dlinha[1]
         monarca.input(inputmsg, nome)
     # Entrega um erro caso o usuário não digite nenhum comando conhecido pelo Monarca. Será ignorado caso seja uma linha vazia. 
     else:
