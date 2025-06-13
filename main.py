@@ -20,12 +20,14 @@ except Exception:
     monarca.erro(f'Arquivo {argumentos.script} não encontrado.')
 
 # A variável c é o índice da linha, e a variável linha contém o texto da linha em si. A cada laço é interpretada uma linha do script.
-for c, linha in zip(range(0, len(script)), script):
-    # Para termos acesso tanto a trechos inteiros da linha de texto quanto a palavras específicas em posições específicas, criamos duas variáveis, linha e dlinha.
-    linha = linha.replace('\n', '') # Impede que a quebra de linha atrapalhe a leitura dos dados
-    dlinha = linha.split(' ')    
-    if linha.strip() == '' or dlinha[0] == '::info': # Checa se a linha é um comentário ou está vazia.
-        continue                                                      # Se sim, a ignora e passa para a próxima.
+for c, linha in zip(range(0, len(script)), script):     
+    linha = linha.replace('\n', '') # Impede que a quebra de linha atrapalhe a leitura dos dados 
+    if '::info' in linha:   # Ignora comentários
+        índice = linha.find('::info')
+        linha = linha[:índice]   
+    dlinha = linha.split(' ') # Para termos acesso tanto a trechos inteiros da linha de texto quanto a palavras específicas em posições específicas, criamos duas variáveis, linha e dlinha.  
+    if linha.strip() == '': # Checa se é uma linha vazia. Se sim, apenas pula para a próxima.
+        continue    
     monarca.linha = c # Informa o índice da linha para o Monarca, a fim de apontar onde ocorreu algum eventual erro. 
     # Verifica se o usuário quer iniciar uma variável
     if len(dlinha) >= 3 and dlinha[0] == 'variável' and dlinha[2] == 'recebe': 
