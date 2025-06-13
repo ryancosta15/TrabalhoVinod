@@ -7,7 +7,7 @@ class Monarca:
         self.operações = ['mais', 'menos', 'vezes', 'dividindo']
         pass
 
-    # Função de erro. Basta passar a mensagem de erro como argumento, que ele vai reconhecer a linha do erro sozinho.
+    # Função de erro. Basta passar a mensagem de erro como argumento que ele vai reconhecer a linha do erro sozinho.
     def erro(self, mensagem=''):
         print('\033[1;33m='*10, 'Monarca', '='*10)
         print(f'\033[1;31m * Erro na linha {self.linha + 1}. \033[0m' + mensagem)
