@@ -28,11 +28,11 @@ for c, linha in zip(range(0, len(script)), script):
         continue                                                      # Se sim, a ignora e passa para a próxima.
     monarca.linha = c # Informa o índice da linha para o Monarca, a fim de apontar onde ocorreu algum eventual erro. 
     # Verifica se o usuário quer iniciar uma variável
-    if dlinha[0] == 'variável' and dlinha[2] == 'recebe': 
+    if len(dlinha) >= 3 and dlinha[0] == 'variável' and dlinha[2] == 'recebe': 
         # Impede nome vazio para variáveis
         if dlinha[1] == '':
-            monarca.erro('O nome da variável não pode ser nulo.')       
-        var = monarca.processar_variavel(dado=' '.join(dlinha[3:])) # Envia tudo o que vier depois de "recebe" para ser processado pela função.    
+            monarca.erro('O nome da variável não pode ser nulo.')               
+        var = monarca.processar_variavel(dado=' '.join(dlinha[3:])) # Envia tudo o que vier depois de "recebe" para ser processado pela função.
         monarca.variavel(operacao='add', nome=dlinha[1], var=var)   
     # Verifica se o usuário quer deletar uma variável
     elif dlinha[0] == 'deletar' and dlinha[1] == 'variável':
