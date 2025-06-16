@@ -33,7 +33,9 @@ for c, linha in zip(range(0, len(script)), script):
     if len(dlinha) >= 3 and dlinha[0] == 'variável' and dlinha[2] == 'recebe': 
         # Impede nome vazio para variáveis
         if dlinha[1] == '':
-            monarca.erro('O nome da variável não pode ser nulo.')               
+            monarca.erro('O nome da variável não pode ser nulo.')
+        elif dlinha[1] in monarca.keywords:
+            monarca.erro(f"\"{dlinha[1]}\" é uma palavra reservada no Monarca.")               
         var = monarca.processar_variavel(dado=' '.join(dlinha[3:])) # Envia tudo o que vier depois de "recebe" para ser processado pela função.
         monarca.variavel(operacao='add', nome=dlinha[1], var=var)   
     # Verifica se o usuário quer deletar uma variável
