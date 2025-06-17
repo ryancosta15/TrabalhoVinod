@@ -5,7 +5,7 @@ class Monarca:
         self.linha = linha
         self.variaveis = {}
         self.operações = ['mais', 'menos', 'vezes', 'dividindo']
-        self.keywords = ['variável', 'recebe', 'deletar', 'clonar', 'mostrar na tela', 'mais', 'menos', 'vezes', 'dividindo']
+        self.keywords = ['variável', 'recebe', 'deletar', 'clonar', 'mais', 'menos', 'vezes', 'dividindo']
         pass
 
     # Função de erro. Basta passar a mensagem de erro como argumento que ele vai reconhecer a linha do erro sozinho.
@@ -54,7 +54,7 @@ class Monarca:
                         elif not palavra in self.operações: # Se não for variável nem número, e também não for nenhuma operação, dá erro.
                             raise Exception
                         expressao.append(palavra)                       
-            # Ao final desse loop while, uma expressão "Oi, meu nome é " nome " e eu tenho " 23,5 mais 5,5 " anos", supondo que nome seja uma variável de valor "Carlos",
+            # Ao encerramento desse loop while, uma expressão "Oi, meu nome é " nome " e eu tenho " 23,5 mais 5,5 " anos", supondo que nome seja uma variável de valor "Carlos",
             # ficaria uma lista ['"Oi, meu nome é "', '"Carlos"', '" e eu tenho "', '23.5', 'mais', '5.5', '" anos"']
 
             # Segunda parte da função, a etapa das operações
