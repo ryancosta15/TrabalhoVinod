@@ -140,13 +140,12 @@ class Monarca:
 
     # Função análoga ao print
     def escrever(self, texto):
-        texto = texto.split(' ')
-        for c in range(0, len(texto)):
-            palavra = texto[c]
-            if palavra[0] == '\\' and palavra[1:] in self.variaveis.keys():
-                texto[c] = str(self.variaveis[palavra[1:]])
-        texto = ' '.join(texto).replace('\\\\', '\\').replace('\n', '')
-        print(texto)    
+        if texto.strip() != '':
+            texto = self.processar_variavel(texto)
+            texto = texto[1:len(texto)-1] if texto[0] in ["\"", "\'"] else texto # O Monarca guarda valores de strings com aspas. Para imprimir, removem-se estas aspas.
+            print(texto)
+        else:
+            self.erro("Nenhum valor indicado para impressão na tela.")
 
     # Função para inicializar ou deletar variáveis
     def variavel(self, operacao='', nome='', var=None):

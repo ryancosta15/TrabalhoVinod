@@ -45,16 +45,13 @@ for c, linha in zip(range(0, len(script)), script):
     elif dlinha[0] == 'clonar' and dlinha[1] == 'variável':
         monarca.clonar_valor(dlinha[2], dlinha[4])      
      # Verifica se o usuário quer mostrar uma mensagem na tela
-    elif linha[:17] == 'mostrar na tela: ' and linha[17:] != '':
-        monarca.escrever(texto=linha[17:])     
+    elif len(dlinha) > 3 and (' '.join(dlinha[:3]) == 'mostrar na tela:' or ' '.join(dlinha[:3]) == 'mostrar na tela'):
+        monarca.escrever(texto=' '.join(dlinha[3:]))     
     # Entrega um erro caso o usuário não digite nenhum comando conhecido pelo Monarca. Será ignorado caso seja uma linha vazia. 
     else:
         monarca.erro(f'Sintaxe inválida. Consulte a documentação.')   
 
 tempo_final = time()
 print(f'\n\033[1;33mTempo de execução: {tempo_final-tempo_inicial:.4f} segundos.\033[m')
-
-##### LEMBRETES
-# Checar como se comportam variáveis com nomes ou dados vazios
 
 
