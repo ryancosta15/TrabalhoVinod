@@ -3,18 +3,13 @@
 # Melhorar o erro "Dado, variável ou operação não reconhecido(a).".
 Esse erro está muito genérico e não ajuda muito.
 
-# Permitir que o usuário utilize aspas ao declarar variáveis.
-Ex: variável "idade" recebe 23
-PERMITIR, não substituir. A ideia é dar mais liberdade para o usuário escrever da maneira que quiser. Poderá escrever tanto variável idade quanto variável "idade".
-
-# Permitir que as palavras-chaves possam ser escritas de outras formas.
-Ex: VARIÁVEL nome RECEBE "Carlos"
-
-# Estudar a possibilidade de permitir mais de um comando. É válido o usuário poder usar tanto "mostrar na tela:" quanto "escrever:"?
-
 # Permitir que o usuário utilize aspas em suas strings.
 Atualmente as aspas são utilizadas apenas na sintaxe do Monarca.
 
 # Buscar uma solução para vincular as palavras-chaves automaticamente com os comandos que estamos escrevendo, ao invés de fazer isso manualmente.
 
 # Toda operação está retornando float ao invés de retornar int quando cabível. Fácil de resolver, e não urgente.
+
+# Implementar as mudanças que Jessé fez na branch principal nessa branch.
+
+# Desfazer as mudanças que eu(ray) fiz em relação a permitir "mostrar na tela" ao invés de "mostrar na tela:"
